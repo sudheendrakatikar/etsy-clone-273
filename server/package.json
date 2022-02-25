@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Backend for Etsy clone - CMPE 273",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sudheendrakatikar/etsy-clone-273.git"
+  },
+  "author": "Sudheendra Katikar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sudheendrakatikar/etsy-clone-273/issues"
+  },
+  "homepage": "https://github.com/sudheendrakatikar/etsy-clone-273#readme"
+}
