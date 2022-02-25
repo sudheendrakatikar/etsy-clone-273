@@ -1,0 +1,23 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "Frontend for Etsy clone - CMPE 273",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sudheendrakatikar/etsy-clone-273.git"
+  },
+  "author": "Sudheendra Katikar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sudheendrakatikar/etsy-clone-273/issues"
+  },
+  "homepage": "https://github.com/sudheendrakatikar/etsy-clone-273#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2"
+  }
+}
