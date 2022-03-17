@@ -16,6 +16,10 @@ const Shop = sequelize.define('shop', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    description: {
+        type: Sequelize.TEXT,
+        allowNull: true
+    }
 })
 
 module.exports = Shop
