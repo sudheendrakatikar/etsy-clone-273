@@ -1,9 +1,13 @@
-const Cart = require('../models/Cart')
+const Favourite = require('../models/Favourite')
 
-const add = async (item) => {
-    const result = await Cart.create(item)
+const add = async (user_id, product_id) => {
+    const newFav = {
+        user_id: user_id,
+        product_id: product_id
+    }
+    const result = await Favourite.create(newFav)
     if (result.toJSON()) {
-        return { success: true, code: 201, message: 'Item added to cart!' }
+        return { success: true, code: 201, message: 'Item added to favourites!' }
     }
     else {
         return { success: false, code: 500, message: 'There was an error, try again' }
@@ -11,7 +15,7 @@ const add = async (item) => {
 }
 
 const get = async (user_id) => {
-    const result = await Cart.find({
+    const result = await Favourite.find({
         where: {
             user_id: user_id
         }
@@ -20,12 +24,12 @@ const get = async (user_id) => {
         return { success: true, code: 200, message: result.toJSON() }
     }
     else {
-        return { success: false, code: 404, message: 'Your cart is empty' }
+        return { success: false, code: 404, message: 'Your favourites list is empty' }
     }
 }
 
 const remove = async (user_id, product_id) => {
-    const result = await Cart.destroy({
+    const result = await Favourite.destroy({
         where: {
             user_id: user_id,
             product_id: product_id

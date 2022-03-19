@@ -25,7 +25,7 @@ const findById = async (id) => {
         where: { id: id }
     })
     if (result) {
-        return { success: true, code: 200, product: result.toJSON() }
+        return { success: true, code: 200, message: result.toJSON() }
     }
     else {
         return { success: false, code: 404, message: 'Product ID not found' }
@@ -39,7 +39,7 @@ const findByName = async (name) => {
         }
     })
     if (result) {
-        return { success: true, code: 200, product: result.toJSON() }
+        return { success: true, code: 200, message: result.toJSON() }
     }
     else {
         return { success: false, code: 404, message: 'No products found' }
@@ -51,7 +51,7 @@ const findByCategory = async (category) => {
         where: { category: category }
     })
     if (result) {
-        return { success: true, code: 200, cart: result.toJSON() }
+        return { success: true, code: 200, message: result.toJSON() }
     }
     else {
         return { success: false, code: 404, message: 'No products found' }
@@ -74,7 +74,6 @@ const remove = async (id) => {
     const result = await Product.destroy({
         where: { id: id }
     })
-    console.log(result)
     if (result == 1) {
         return { success: true, code: 202, message: 'Product deleted!' }
     }

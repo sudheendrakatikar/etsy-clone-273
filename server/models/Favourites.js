@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const sequelize = require('../config/database')
 
-const Favourites = sequelize.define('favourites', {
+const Favourite = sequelize.define('favourite', {
     user_id: {
         type: Sequelize.INTEGER,
         allowNull: false
@@ -12,4 +12,4 @@ const Favourites = sequelize.define('favourites', {
     }
 })
 
-module.exports = Favourites
+module.exports = Favourite
