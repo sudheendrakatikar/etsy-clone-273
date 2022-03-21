@@ -28,6 +28,10 @@ const favourite = require('./api/favourite')
 const shop = require('./api/shop')
 const cart = require('./api/cart')
 
+app.get('/', (req, res) => {
+    res.status(200).send()
+})
+
 app.use('/api/auth', auth)
 app.use('/api/user', user)
 app.use('/api/product', product)
