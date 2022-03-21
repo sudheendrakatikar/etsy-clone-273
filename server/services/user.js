@@ -1,57 +1,19 @@
 const User = require('../models/User')
-const CryptoJS = require('crypto-js')
-const jwt = require('jsonwebtoken')
 
-const register = async (data) => {
-    const newUser = {
-        name: data.name,
-        email: data.email,
-        password: CryptoJS.AES.encrypt(
-            data.password,
-            process.env.PASS_SEC
-        ).toString(),
-    }
-    const user = await User.create(newUser)
-    if (user.toJSON()) {
-        return { success: true, message: 'Account created! You can login now' }
+const get = async (user_id) => {
+    const result = await User.findOne({
+        where: { user_id: user_id }
+    })
+    if (result) {
+        return { succcess: true, code: 200, message: result.toJSON() }
     }
     else {
-        return { success: false, message: 'There was an error, try again' }
+        return { succcess: true, code: 500, message: 'There was an error, please try again' }
     }
 }
 
-const login = async (data) => {
-    const email = data.email
-    const password = data.password
-    const result = await User.findOne({
-        where: { email: email }
-    })
-    if (!result) {
-        return { success: false, code: 401, message: 'Email not found' }
-    }
-    const user = result.toJSON()
-    const hashedPassword = CryptoJS.AES.decrypt(
-        user.password,
-        process.env.PASS_SEC
-    )
-    const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
-    if (originalPassword != password) {
-        return { success: false, code: 401, message: 'Invalid credentials' }
-    }
-    const accessToken = jwt.sign(
-        {
-            id: user.id,
-        },
-        process.env.JWT_SEC,
-        { expiresIn: "3d" }
-    )
-    return { success: true, code: 200, token: accessToken }
+const update = async (data) => {
+
 }
 
-const logout = (data) => {
-    console.log(`Logging out user ${data.email} with token ${data.token}`)
-    return { success: true, code: 200 }
-}
-
-module.exports = { register, login, logout }
-
+module.exports = { get, update }

@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const user = require('../services/user')
+const auth = require('../services/auth')
 
 router.post('/register', async (req, res) => {
-    const result = await user.register(req.body)
+    const result = await auth.register(req.body)
     if (result.success) {
         res.status(201)
     }
@@ -13,12 +13,12 @@ router.post('/register', async (req, res) => {
 })
 
 router.post('/login', async (req, res) => {
-    const result = await user.login(req.body)
+    const result = await auth.login(req.body)
     res.status(result.code).json(result)
 })
 
 router.post('/logout', (req, res) => {
-    const result = user.logout(req.body)
+    const result = auth.logout(req.body)
     res.status(200).json(result)
 })
 

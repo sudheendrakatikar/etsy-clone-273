@@ -22,17 +22,23 @@ const cors = require('cors')
 app.use(cors())
 
 const auth = require('./api/auth')
+const user = require('./api/user')
 const product = require('./api/product')
+const favourite = require('./api/favourite')
 const shop = require('./api/shop')
 const cart = require('./api/cart')
 
 app.use('/api/auth', auth)
+app.use('/api/user', user)
 app.use('/api/product', product)
+app.use('/api/favourite', favourite)
 app.use('/api/shop', shop)
 app.use('/api/cart', cart)
 
 app.use(express.static(__dirname + '/img'));
 
-app.listen(process.env.PORT || 5000, () => {
+const server = app.listen(process.env.PORT || 5000, () => {
     console.log('Backend server is running!')
 })
+
+module.exports = server

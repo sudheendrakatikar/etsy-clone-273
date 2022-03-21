@@ -20,9 +20,19 @@ const create = async (data) => {
     }
 }
 
-const findById = async (id) => {
+const findAll = async () => {
+    const result = await Product.findAll()
+    if (result.length > 0) {
+        return { success: true, code: 200, message: JSON.parse(JSON.stringify(result)) }
+    }
+    else {
+        return { success: false, code: 404, message: 'No products found' }
+    }
+}
+
+const findById = async (product_id) => {
     const result = await Product.findOne({
-        where: { id: id }
+        where: { product_id: product_id }
     })
     if (result) {
         return { success: true, code: 200, message: result.toJSON() }
@@ -58,9 +68,9 @@ const findByCategory = async (category) => {
     }
 }
 
-const update = async (id, data) => {
+const update = async (product_id, data) => {
     const result = await Product.update(data, {
-        where: { id: id }
+        where: { product_id: product_id }
     })
     if (result[0] == 1) {
         return { success: true, code: 202, message: 'Product updated!' }
@@ -70,9 +80,9 @@ const update = async (id, data) => {
     }
 }
 
-const remove = async (id) => {
+const remove = async (product_id) => {
     const result = await Product.destroy({
-        where: { id: id }
+        where: { product_id: product_id }
     })
     if (result == 1) {
         return { success: true, code: 202, message: 'Product deleted!' }
@@ -82,4 +92,4 @@ const remove = async (id) => {
     }
 }
 
-module.exports = { create, findById, findByName, findByCategory, update, remove }
+module.exports = { create, findAll, findById, findByName, findByCategory, update, remove }

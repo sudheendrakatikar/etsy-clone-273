@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const favourites = require('../services/favourites')
+const favourites = require('../services/favourite')
 
 router.post('/', async (req, res) => {
     const result = await favourites.add(req.query.user_id, req.query.product_id)
@@ -7,7 +7,7 @@ router.post('/', async (req, res) => {
 })
 
 router.get('/', async (req, res) => {
-    const result = await favourites.get(req.query.user_id, req.query.product_id)
+    const result = await favourites.get(req.query.user_id)
     res.status(result.code).json(result)
 })
 

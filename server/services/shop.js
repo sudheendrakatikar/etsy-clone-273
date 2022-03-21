@@ -12,11 +12,20 @@ const available = async (name) => {
     }
 }
 
-const create = async (data) => {
-    const newShop = {
-        user_id: data.user_id,
-        name: data.name,
+const get = async (user_id) => {
+    const result = await Shop.findOne({
+        where: { user_id: user_id }
+    })
+    if (result) {
+        return { success: true, code: 200, message: result.toJSON() }
     }
+    else {
+        return { success: false, code: 404 }
+    }
+}
+
+const create = async (newShop) => {
+    console.log(newShop)
     const shop = await Shop.create(newShop)
     if (shop.toJSON()) {
         return { success: true, code: 201, message: 'Shop created!' }
@@ -26,4 +35,4 @@ const create = async (data) => {
     }
 }
 
-module.exports = { available, create }
+module.exports = { available, get, create }

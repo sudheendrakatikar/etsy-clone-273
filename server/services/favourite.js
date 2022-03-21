@@ -15,13 +15,14 @@ const add = async (user_id, product_id) => {
 }
 
 const get = async (user_id) => {
-    const result = await Favourite.find({
+    console.log('GET FAV ---------- ' + user_id)
+    const result = await Favourite.findAll({
         where: {
             user_id: user_id
         }
     })
-    if (result) {
-        return { success: true, code: 200, message: result.toJSON() }
+    if (result.length > 0) {
+        return { success: true, code: 200, message: JSON.parse(JSON.stringify(result)) }
     }
     else {
         return { success: false, code: 404, message: 'Your favourites list is empty' }

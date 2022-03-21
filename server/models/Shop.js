@@ -2,14 +2,9 @@ const Sequelize = require('sequelize')
 const sequelize = require('../config/database')
 
 const Shop = sequelize.define('shop', {
-    id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-        allowNull: false
-    },
     user_id: {
         type: Sequelize.INTEGER,
+        primaryKey: true,
         allowNull: false
     },
     name: {

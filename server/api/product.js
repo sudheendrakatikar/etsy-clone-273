@@ -7,8 +7,22 @@ router.post('/', async (req, res) => {
 })
 
 router.get('/', async (req, res) => {
-    const id = req.query.id
-    const result = await product.findById(id)
+    const result = await product.findAll()
+    res.status(result.code).json(result)
+})
+
+router.get('/id', async (req, res) => {
+    const result = await product.findById(req.query.id)
+    res.status(result.code).json(result)
+})
+
+router.get('/name', async (req, res) => {
+    const result = await product.findByName(req.query.name)
+    res.status(result.code).json(result)
+})
+
+router.get('/category', async (req, res) => {
+    const result = await product.findByCategory(req.query.category)
     res.status(result.code).json(result)
 })
 

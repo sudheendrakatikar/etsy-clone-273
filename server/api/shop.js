@@ -2,13 +2,17 @@ const router = require('express').Router();
 const shop = require('../services/shop')
 
 router.get('/available', async (req, res) => {
-    const name = req.query.name
-    const result = await shop.available(name)
+    const result = await shop.available(req.query.name)
     res.status(200).json(result)
 })
 
+router.get('/', async (req, res) => {
+    const result = await shop.get(req.query.user_id)
+    res.status(result.code).json(result)
+})
+
 router.post('/', async (req, res) => {
-    const result = await shop.create(req.body, req.files)
+    const result = await shop.create(req.body)
     if (result.success) {
         res.status(201)
     }
