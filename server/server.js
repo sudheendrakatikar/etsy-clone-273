@@ -1,48 +1,39 @@
 const express = require('express')
 const app = express()
-app.use(express.json())
-
-const sequelize = require('./config/database')
-connectToDb()
-async function connectToDb() {
-    try {
-        await sequelize.authenticate()
-        console.log('Connected to database')
-        sequelize.sync()
-    }
-    catch (err) {
-        console.log(err)
-    }
-}
-
-const dotenv = require("dotenv")
-dotenv.config()
-
 const cors = require('cors')
+const mongo = require('mongoose')
+const dotenv = require('dotenv');
+const passport = require('passport')
+
+dotenv.config();
+
 app.use(cors())
+app.use(passport.initialize())
 
-const auth = require('./api/auth')
-const user = require('./api/user')
-const product = require('./api/product')
-const favourite = require('./api/favourite')
-const shop = require('./api/shop')
-const cart = require('./api/cart')
+require('./src/controllers/passport.js')
 
-app.get('/', (req, res) => {
-    res.status(200).send()
+mongo.connect(process.env.DATABASE,{
+    useNewUrlParser:true,
+    useUnifiedTopology: true,
+}).then(()=>{
+    console.log('DB Connected');
+}).catch((err)=>{console.log(err)})
+ 
+
+//Init Middleware
+app.use(express.json({extended:false}))
+
+app.use('/api/users',require('./src/routes/user.routes'))
+app.use('/api/shop',require('./src/routes/seller.routes'))
+app.use('/api/dashboard',require('./src/routes/dashboard.routes'))
+app.use('/api/order',require('./src/routes/order.routes'))
+app.use('/api/products',require('./src/routes/products.routes'))
+
+const PORT = process.env.PORT || 8585
+
+
+app.listen(PORT,(req,res)=>{
+    console.log("Server running on port 8585")
 })
 
-app.use('/api/auth', auth)
-app.use('/api/user', user)
-app.use('/api/product', product)
-app.use('/api/favourite', favourite)
-app.use('/api/shop', shop)
-app.use('/api/cart', cart)
-
-app.use(express.static(__dirname + '/img'));
-
-const server = app.listen(process.env.PORT || 5000, () => {
-    console.log('Backend server is running!')
-})
-
-module.exports = server
+module.exports = app
