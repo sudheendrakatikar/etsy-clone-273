@@ -1,2 +1,5 @@
 node_modules/
 img/
+aws-access.csv
+ec2-1.pem
+gh-token.txt
