@@ -1,6 +1,7 @@
 const kafkaConnection = require('./Connect')
 const uuid = require('uuid').v4
 
+
 module.exports = class KafkaRequestResponse {
 
     requests = {}
@@ -35,15 +36,17 @@ module.exports = class KafkaRequestResponse {
 
     kafkaResponse(next){
         let requestsWaiting = this.requests
+        console.log("Requests Waiting: ",requestsWaiting)
         this.consumer.on('message', function (message) {
             console.log("Acknowledgement recieved :",message)
 
             var acknowledgementData = JSON.parse(message.value)
             var correlationId = acknowledgementData.payload.correlationId
 
+            console.log("CorreleationID: ",correlationId)
+            console.log("request:", requestsWaiting)
             if (correlationId in requestsWaiting) {
 
-                console.log("yes yes")
                 var entry = requestsWaiting[correlationId]
 
                 delete requestsWaiting[correlationId]
@@ -57,7 +60,7 @@ module.exports = class KafkaRequestResponse {
                     return entry.results(acknowledgementData.payload.content, null)   
                 }
 
-                entry.results('Server Error', null)   
+                return entry.results('Server Error', null)   
             }
         });
         this.requests = requestsWaiting

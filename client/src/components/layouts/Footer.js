@@ -6,27 +6,27 @@ const Footer = () => {
 
     const [showCountrySettings, setSHowCountrySettings] = useState(false)
 
-    const [country, setCountry] = useState()
-    const [currency, setCurrency] = useState()
+    const [country,setCountry] = useState()
+    const [currency,setCurrency] = useState()
 
     const changeCountryAndCurrency = () => {
         console.log(country)
         const cc = country_currencies.filter(item => item.country == country)
         const currency = cc[0].currency_code
         setCurrency(currency)
-        window.localStorage.setItem("country_currency", [country, currency])
+        window.localStorage.setItem("country_currency",[country,currency])
         setSHowCountrySettings(false)
         window.location.reload(false)
     }
 
-    useEffect(() => {
+    useEffect(()=>{
         const cc = window.localStorage.getItem("country_currency")
         console.log(cc)
-        if (cc) {
+        if(cc){
             setCountry(cc.split(',')[0])
             setCurrency(cc.split(',')[1])
         }
-    }, [])
+    },[])
 
     return (
         <Fragment >
@@ -43,7 +43,7 @@ const Footer = () => {
                     <Modal.Title>Update Country Settings</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form.Select aria-label="Country" onChange={(e) => setCountry(e.target.value)}>
+                    <Form.Select aria-label="Country" onChange={(e)=>setCountry(e.target.value)}>
                         {country_currencies.map(item => (
                             <option>{item.country}</option>
                         ))}

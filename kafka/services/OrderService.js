@@ -22,8 +22,8 @@ exports.placeOrder = async (payload,cb) => {
                 name:product.name,
                 category:product.category,
                 description:product.description,
-                price:product.price,
-                quantity:product.quantity,
+                price:price,
+                quantity:quantity,
                 product_img:product.img,
                 user_id:userId,
                 first_name:user.first_name,
@@ -51,8 +51,9 @@ exports.placeOrder = async (payload,cb) => {
 
 exports.myOrders = async (payload,cb) => {
     const {id} = payload
+    console.log("user id: ",id)
     try {
-        const orders = await OrderModel.find({id}).exec()
+        const orders = await OrderModel.find({user_id:id}).sort({"createdAt":-1}).exec()
         if(orders){
             return cb(null,orders)
         }

@@ -13,7 +13,7 @@ kafkaConection.getConsumer('users',(consumer) => {
         const {payload,correlationId} = data 
         const { action } = payload
         
-        console.log("1. Cosumed Data at backend...")
+        console.log("1. Cosumed Data at backend...",action)
 
         if(action == actions.CREATE_USER){
             UserService.createUser(payload,(err,res) => {
@@ -65,9 +65,9 @@ kafkaConection.getConsumer('users',(consumer) => {
                         correlationId:correlationId
                     }
                 }
-        
+                console.log(payload)
                 //Send Response to acknowledge topic
-                payloads = [
+                let payloads = [
                     {topic:'acknowledge',messages:JSON.stringify({"acknowledgementpayload":true,payload}),partition:0}
                 ]
                 producer.send(payloads,(err,data)=>{
@@ -141,3 +141,4 @@ kafkaConection.getConsumer('users',(consumer) => {
         }
     })
 })
+

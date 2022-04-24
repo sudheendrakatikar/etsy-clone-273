@@ -42,6 +42,7 @@ const AddItem = ({ addItem, setAddItem, sellerId, shop }) => {
         e.preventDefault()
         try {
             const imageName = `shops/${shop.name}/${name}.jpg`
+            console.log(imageName)
             const params = {
                 Bucket: bucketName,
                 Key: imageName,
@@ -49,6 +50,7 @@ const AddItem = ({ addItem, setAddItem, sellerId, shop }) => {
                 ContentType: 'image/*'
             }
             const uploadUrl = await s3.getSignedUrlPromise('putObject', params)
+            console.log(uploadUrl)
             await fetch(new Request(uploadUrl, {
                 method: "PUT",
                 body: img[0],
@@ -57,11 +59,12 @@ const AddItem = ({ addItem, setAddItem, sellerId, shop }) => {
                 })
             }))
             const imageUrl = uploadUrl.split('?')[0]
+            console.log(imageUrl)
             const res = await axios.post(constants.uri+"/shop/addItem", { ...formData, sellerId, img: imageUrl })
             if (res.data) {
                 toast.success("New Item added")
                 setAddItem(false)
-                window.location.reload(false)
+                //window.location.reload(false)
             }
         } catch (error) {
                 toast("Failed to save new item!")
