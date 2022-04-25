@@ -48,7 +48,7 @@ const UserProfile = props => {
     const removeFromFavorites = async (item) => {
         const res = await axios.post(constants.uri+"/users/remove-from-favorites", { id: profile.id, productId: item.product_id })
         if (res.data) {
-            toast.success("Removed from your favorites collection!")
+            // toast.success("Removed from your favorites collection!")
             const {data} = await axios.post(constants.uri+'/users/myFavorites', { id: profile.id })
             setProductGrid(data)
         }

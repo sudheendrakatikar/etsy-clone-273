@@ -51,14 +51,14 @@ const Signup = ({ showModal, setShowModal }) => {
             if (res.status === 200) {
                 window.localStorage.setItem("userdetails",res.data.token)
                 setShowModal(false)
-                toast.success("Registered",{
-                    position: "top-center",
-                })
+                // toast.success("Registered",{
+                //     position: "top-center",
+                // })
                 setLoggedIn(true)
             }
         } catch (error) {
             setShowModal(false)
-            toast("Sorry, Try again",{position:"top-center"})
+            // toast("Sorry, Try again",{position:"top-center"})
         }
     }
 
@@ -69,15 +69,15 @@ const Signup = ({ showModal, setShowModal }) => {
             if(res.status === 200 ){
                 window.localStorage.setItem("userdetails",res.data.token)
                 setShowModal(false)
-                toast.success("Loggedin", {
-                    position: "top-center",
-                })
+                // toast.success("Loggedin", {
+                //     position: "top-center",
+                // })
                 setLoggedIn(true)
                 window.location.reload(false)
             }
         } catch (error) {
             setShowModal(false)
-            toast("Sorry, Try again",{position:"top-center"})
+            // toast("Sorry, Try again",{position:"top-center"})
         }
     }
 
@@ -127,7 +127,7 @@ const Signup = ({ showModal, setShowModal }) => {
                                     </Form.Group>
                                 </Col>
                                 <Col>
-                                    <span>Forgort Password?</span>
+                                    <span>Forgot Password</span>
                                 </Col>
                             </Row>
 

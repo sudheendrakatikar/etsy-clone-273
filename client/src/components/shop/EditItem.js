@@ -40,7 +40,7 @@ const EditItem = ({ editItem, setEditItem, item }) => {
                 quantity:editFormData.quantity,
             })
         if(res.data){
-            toast.success("Item Updated")
+            // toast.success("Item Updated")
             setEditItem(false)
             window.location.reload(false);
         }

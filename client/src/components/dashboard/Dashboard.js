@@ -67,10 +67,10 @@ const Dashboard = () => {
                     if (res.data) {
                         fav.splice(index, 1)
                         setFavorites(fav)
-                        toast("Removed from your favorites collection!", { position: 'top-center' })
+                        // toast("Removed from your favorites collection!", { position: 'top-center' })
                     }
                 } catch (error) {
-                    toast("Failed to remove from Favorites", { position: 'top-center' })
+                    // toast("Failed to remove from Favorites", { position: 'top-center' })
                 }
             }
         } else {
@@ -78,9 +78,9 @@ const Dashboard = () => {
             try {
                 const res = await axios.post(constants.uri + "/users/add-to-favorites", { id: user.id, productId: product.product_id })
                 setFavorites([...favorites, product.product_id])
-                toast("Added to your favorites collection!", { position: 'top-center' })
+                // toast("Added to your favorites collection!", { position: 'top-center' })
             } catch (error) {
-                toast("Failed to add to favorites")
+                // toast("Failed to add to favorites")
             }
         }
     }

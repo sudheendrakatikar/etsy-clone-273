@@ -45,7 +45,7 @@ const NavBarLayout = props => {
     window.localStorage.setItem("userdetails", "")
     setLoggedIn(false)
     window.location.reload(false)
-    toast.success("Logged Out")
+    // toast.success("Logged Out")
   }
 
   const searchSubmit = (e) => {

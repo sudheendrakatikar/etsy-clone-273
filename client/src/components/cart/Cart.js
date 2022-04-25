@@ -53,19 +53,19 @@ const Cart = () => {
             }
 
             if (i == cartItems.length) {
-                toast.success("Order Placed")
+                // toast.success("Order Placed")
                 setOrderPlaced(true)
             }
            // window.localStorage.setItem('cart', window.localStorage.getItem('cart') - 1)
         })
-        toast.success()
+        // toast.success()
     }
 
     const removeFromCart = async (item) => {
         const res = await axios.post(constants.uri + '/order/cart/remove-item', { userId, productId: item.product_id })
         if (res.data) {
             setCartItems(cartItems.filter(ele => ele.id != item.id))
-            toast('Item removed from cart')
+            // toast('Item removed from cart')
 
             //Calculate subtotal
             var total = 0

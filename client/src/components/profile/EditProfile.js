@@ -108,7 +108,7 @@ const EditProfile = () => {
         const imageUrl = uploadUrl.split('?')[0]
         const res = await axios.post(constants.uri+"/users/update-profile", { ...formData, id: userId, profileImg: imageUrl })
         if (res.status === 200) {
-            toast.success("User Profile Updated")
+            // toast.success("User Profile Updated")
             setProfileUpdated(true)
         }
     }

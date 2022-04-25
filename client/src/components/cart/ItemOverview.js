@@ -33,9 +33,9 @@ const ItemOverview = () => {
             const price = product.price
             const res = await axios.post(constants.uri+'/order/add-to-cart',{productId,userId,quantity,price})
             window.localStorage.setItem('cart',window.localStorage.getItem('cart')+1)
-            toast('Item added to your Cart!')
+            // toast('Item added to your Cart!')
         } catch (error) {
-            toast('Failed to add to Cart')
+            // toast('Failed to add to Cart')
         }
     }
 
@@ -48,10 +48,10 @@ const ItemOverview = () => {
             const price = product.price
             const res = await axios.post(constants.uri+'/order/add-to-cart',{productId,userId,quantity,price})
             window.localStorage.setItem('cart',window.localStorage.getItem('cart')+1)
-            toast('Item added to your Cart!')
+            // toast('Item added to your Cart!')
             setBuyNowENabled(true)
         } catch (error) {
-            toast('Failed to add to Cart')
+            // toast('Failed to add to Cart')
         }
     }
 

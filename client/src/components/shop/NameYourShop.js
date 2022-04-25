@@ -30,11 +30,11 @@ const NameYourShop = () => {
         try {
             const res = await axios.post(constants.uri+"/shop/add",{name})
             if(res.data){
-                toast.success("Registered your new shop")
+                // toast.success("Registered your new shop")
                 setRegistered(true)
             }
         } catch (error) {
-            toast("Sorry! Try registering agian")
+            // toast("Sorry! Try registering agian")
         }
     }
 

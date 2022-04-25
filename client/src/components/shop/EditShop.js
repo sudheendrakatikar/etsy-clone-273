@@ -54,14 +54,14 @@ const EditShop = ({ editShop, setEditShop, shopName, shop }) => {
                     img: imageUrl
                 })
             if (res.status === 200) {
-                toast.success("Shop Updated")
+                // toast.success("Shop Updated")
                 shop = res.data
                 setEditShop(false)
                 setUpdated(true)
                // window.location.reload(false)
             }
         } catch (error) {
-            toast("Failed to update shop, Try again!")
+            // toast("Failed to update shop, Try again!")
         }
     }
 
