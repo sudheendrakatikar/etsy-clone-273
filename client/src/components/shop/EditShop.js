@@ -19,14 +19,11 @@ const EditShop = ({ editShop, setEditShop, shopName, shop }) => {
         setUpdateFormData(shop)
     }, [])
 
-    console.log(shop, updateFormData)
 
     const updateShop = async (e) => {
         e.preventDefault()
-        console.log(updateFormData, shopName)
         try {
             const imageName = `shops/${shopName}/profile/${shopName}.jpg`
-            console.log(imageName)
             const params = {
                 Bucket: bucketName,
                 Key: imageName,
@@ -36,7 +33,6 @@ const EditShop = ({ editShop, setEditShop, shopName, shop }) => {
             var uploadUrl = ""
             var imageUrl = shop.img
             if (img) {
-                console.log("-------s3",s3)
                 uploadUrl = await s3.getSignedUrlPromise('putObject', params)
                 await fetch(new Request(uploadUrl, {
                     method: "PUT",
@@ -47,15 +43,6 @@ const EditShop = ({ editShop, setEditShop, shopName, shop }) => {
                 }))
                 imageUrl = uploadUrl.split('?')[0]
             }
-
-            console.log( {
-                name: updateFormData.name? updateFormData.name : shopName,
-                email: updateFormData.email,
-                ownerName: updateFormData.owner_name,
-                phNumber: updateFormData.ph_number,
-                sellerId: shop.seller_id,
-                img: imageUrl
-            })
            
             const res = await axios.post(constants.uri + "/shop/update",
                 {
@@ -66,17 +53,14 @@ const EditShop = ({ editShop, setEditShop, shopName, shop }) => {
                     sellerId: shop.seller_id,
                     img: imageUrl
                 })
-            console.log(res)
             if (res.status === 200) {
                 toast.success("Shop Updated")
                 shop = res.data
-                console.log(shop)
                 setEditShop(false)
                 setUpdated(true)
                // window.location.reload(false)
             }
         } catch (error) {
-            console.log(error)
             toast("Failed to update shop, Try again!")
         }
     }

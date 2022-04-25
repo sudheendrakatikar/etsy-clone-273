@@ -42,12 +42,10 @@ const Signup = ({ showModal, setShowModal }) => {
     const onChangeLoginData = e => {
         e.preventDefault()
         setLoginForm({...loginForm,[e.target.name]:e.target.value})
-        console.log(loginForm)
     }
 
     const onSubmitRegister = async e => {
         e.preventDefault()
-        console.log(registerForm)
         try {
             const res = await axios.post(constants.uri+"/users/register", registerForm)
             if (res.status === 200) {

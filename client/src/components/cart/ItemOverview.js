@@ -32,7 +32,6 @@ const ItemOverview = () => {
             const userId = data.id
             const price = product.price
             const res = await axios.post(constants.uri+'/order/add-to-cart',{productId,userId,quantity,price})
-            console.log(window.localStorage.getItem('cart'))
             window.localStorage.setItem('cart',window.localStorage.getItem('cart')+1)
             toast('Item added to your Cart!')
         } catch (error) {
@@ -48,7 +47,6 @@ const ItemOverview = () => {
             const userId = data.id
             const price = product.price
             const res = await axios.post(constants.uri+'/order/add-to-cart',{productId,userId,quantity,price})
-            console.log(window.localStorage.getItem('cart'))
             window.localStorage.setItem('cart',window.localStorage.getItem('cart')+1)
             toast('Item added to your Cart!')
             setBuyNowENabled(true)

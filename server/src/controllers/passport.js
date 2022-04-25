@@ -9,9 +9,9 @@ opts.secretOrKey = process.env.SECRET_KEY;
 
 const UserModel = require('./../model/UserModel')
 
-passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-    
-    UserModel.findOne({id:jwt_payload.user.id}, function(err, user) {
+passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
+
+    UserModel.findOne({ id: jwt_payload.user.id }, function (err, user) {
         if (err) {
             return done(err, false);
         }
@@ -19,11 +19,10 @@ passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
             return done(null, user);
         } else {
             return done(null, false);
-            // or you could create a new account
         }
     });
 }));
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
     done(null, user);
 });

@@ -24,12 +24,10 @@ const Dashboard = () => {
         //Set user id from access token stored in localstorage
         const token = window.localStorage.getItem("userdetails")
         const res = await axios.post(constants.uri + "/users/auth", { token })
-        console.log(res)
         setUser(res.data)
 
         //Get all products
         const { data } = await axios.get(constants.uri + '/dashboard/products')
-        console.log(data)
         const grid = []
         for (var i = 0; i < data.length; i = i + 3) {
             var ar = []
@@ -44,14 +42,12 @@ const Dashboard = () => {
             }
             grid.push(ar)
         }
-        console.log(grid)
         setProducts(grid)
 
         const curr = window.localStorage.getItem('country_currency')
         setCurrency(curr.split(',')[1])
 
         const fav = await axios.post(constants.uri + '/users/myFavorites', { id: res.data.id })
-        console.log(fav.data)
 
         var favItems = []
         fav.data.map(item => {
@@ -80,12 +76,10 @@ const Dashboard = () => {
         } else {
             //Add to favorites
             try {
-                console.log(user)
                 const res = await axios.post(constants.uri + "/users/add-to-favorites", { id: user.id, productId: product.product_id })
                 setFavorites([...favorites, product.product_id])
                 toast("Added to your favorites collection!", { position: 'top-center' })
             } catch (error) {
-                console.log(error)
                 toast("Failed to add to favorites")
             }
         }
@@ -94,13 +88,12 @@ const Dashboard = () => {
     return (
         <Fragment >
             <Card >
-                <Card.Body style={{ backgroundColor: "#FDEBD2", height: "100%" }}>
+                <Card.Body style={{ backgroundColor: "#ccff99", height: "100%" }}>
                     <Row>
                         {user && (
-                            <h2 style={{ textAlign: 'center' }}>Welcome  {user.first_name}!</h2>
+                            <h2 style={{ textAlign: 'center' }}>Hi {user.first_name}!</h2>
                         )}
-
-                        <h3 style={{ textAlign: 'center' }}>Explore  our unique Products! Shop Now.</h3>
+                        <h3 style={{ textAlign: 'center' }}>Welcome to yEtsy.</h3>
                     </Row>
                     <br />
                     <br />
@@ -111,7 +104,7 @@ const Dashboard = () => {
                                 <Row>
                                     <Image roundedCircle width={5} height={120} src={clothing} />
                                 </Row>
-                                <Row><h6 style={{ textAlign: 'center' }}>Clothing</h6></Row>
+                                <Row><h6 style={{ textAlign: 'center' }}>Fashion</h6></Row>
                             </Link>
                         </Col>
                         <Col sm={2}>
@@ -153,7 +146,6 @@ const Dashboard = () => {
             </Card>
             <br />
             <Card>
-                <Card.Title style={{ marginRight: "10%", marginLeft: "10%", textAlign: 'center' }}>Discover our unique products! Shop NOW.</Card.Title>
                 <Card.Body style={{ marginRight: "10%", marginLeft: "10%" }}>
                     {products && products.length > 0 && products.map(productRow => (
                         <Row>

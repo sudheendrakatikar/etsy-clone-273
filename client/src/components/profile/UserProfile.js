@@ -55,7 +55,6 @@ const UserProfile = props => {
     }
 
     const search = async () => {
-        console.log(searchFav)
         const {data} = await axios.post(constants.uri+'/users/myFavorites', { id: profile.id })
         var favs = []
         favs  =data
@@ -66,7 +65,6 @@ const UserProfile = props => {
     const onChangeSearchFav = async (e) => {
         e.preventDefault()
         if(e.target.value.length == 0){
-            console.log(e.target.value,"no value")
             setSearchFav("")
             const res = await axios.post(constants.uri+'/users/myFavorites', { id: profile.id })
             setProductGrid(res.data)

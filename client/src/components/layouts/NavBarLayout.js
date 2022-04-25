@@ -50,7 +50,6 @@ const NavBarLayout = props => {
 
   const searchSubmit = (e) => {
     e.preventDefault()
-    console.log(searchParameter)
     setSearch(true)
   }
 
@@ -66,7 +65,7 @@ const NavBarLayout = props => {
 
           <Col sm={1}></Col>
           <Col sm={1}>
-            <Navbar.Brand href="#"><Link to="/dashboard" style={{ textDecoration: 'none', color: 'white' }}><span style={{ fontSize: 28, fontWeight: 'bold' }}>Etsy</span></Link></Navbar.Brand>
+            <Navbar.Brand href="#"><Link to="/dashboard" style={{ textDecoration: 'none', color: 'white' }}><span style={{ fontSize: 28, fontWeight: 'bold' }}>YETSY</span></Link></Navbar.Brand>
           </Col>
 
           <Navbar.Toggle aria-controls="navbarScroll" />

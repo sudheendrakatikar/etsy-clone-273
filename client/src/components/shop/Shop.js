@@ -15,8 +15,8 @@ const Shop = () => {
     const [shopName, setShopName] = useState("")
     const [editShop, setEditShop] = useState(false)
     const [addItem, setAddItem] = useState(false)
-    const [editItem,setEditItem] = useState(false)
-    const [itemToEdit,setItemToEdit] = useState({})
+    const [editItem, setEditItem] = useState(false)
+    const [itemToEdit, setItemToEdit] = useState({})
     const [shop, setShop] = useState({})
     const params = useParams()
 
@@ -25,9 +25,9 @@ const Shop = () => {
     useEffect(async () => {
         setShopName(params.name)
         const n = params.name
-        const res = await axios.post(constants.uri+"/shop/byname", { name: n })
+        const res = await axios.post(constants.uri + "/shop/byname", { name: n })
         const sellerId = res.data.seller_id
-        const { data } = await axios.post(constants.uri+"/shop/getItems", { sellerId })
+        const { data } = await axios.post(constants.uri + "/shop/getItems", { sellerId })
         setShop(res.data)
         var grid = []
         for (var i = 0; i < data.length; i = i + 3) {
@@ -39,17 +39,12 @@ const Shop = () => {
                 ar.push(data[i + 1])
             }
             if (data[i + 2]) {
-                ar.push(data[i+2])
+                ar.push(data[i + 2])
             }
             grid.push(ar)
         }
-        console.log(grid)
         setArrGrid(grid)
     }, [])
-
-    console.log(arrGrid)
-
-
 
     const onEditItem = (item) => {
         setEditItem(true)
@@ -111,23 +106,23 @@ const Shop = () => {
                                         <Row>
                                             {arr && arr.map(item => (
                                                 <Col sm={3}>
-                                    
-                                                            <Card.Body onClick={()=>onEditItem(item)}>
-                                                                <Card.Text>
-                                                                    <Card style={{ width: '13rem', height: '13rem' }}>
-                                                                        <Card.Img variant="top" width={70} height={100} src={item.img} />
-                                                                        <Card.Body>
-                                                                            <Card.Title><span style={{ fontWeight: 'bold' }}>{item.name}</span> | <span style={{ fontWeight: 'lighter', fontSize:15 }}>{item.sales} Sales</span></Card.Title>
-                                                                            <Card.Text>
-                                                                                $ {item.price} | {item.quantity > 0 ? (<span style={{ fontWeight: 'lighter' }}>{item.quantity} available</span>) : (<span style={{ fontWeight: 'lighter', color: 'red' }}>Out of Stock</span>)}
-                                                                     
-                                                                            </Card.Text>
-                                                                            {/* <Button variant="primary">Go somewhere</Button> */}
-                                                                        </Card.Body>
-                                                                    </Card>
-                                                                </Card.Text>
-                                                            </Card.Body>
-                                                
+
+                                                    <Card.Body onClick={() => onEditItem(item)}>
+                                                        <Card.Text>
+                                                            <Card style={{ width: '13rem', height: '13rem' }}>
+                                                                <Card.Img variant="top" width={70} height={100} src={item.img} />
+                                                                <Card.Body>
+                                                                    <Card.Title><span style={{ fontWeight: 'bold' }}>{item.name}</span> | <span style={{ fontWeight: 'lighter', fontSize: 15 }}>{item.sales} Sales</span></Card.Title>
+                                                                    <Card.Text>
+                                                                        $ {item.price} | {item.quantity > 0 ? (<span style={{ fontWeight: 'lighter' }}>{item.quantity} available</span>) : (<span style={{ fontWeight: 'lighter', color: 'red' }}>Out of Stock</span>)}
+
+                                                                    </Card.Text>
+                                                                    {/* <Button variant="primary">Go somewhere</Button> */}
+                                                                </Card.Body>
+                                                            </Card>
+                                                        </Card.Text>
+                                                    </Card.Body>
+
                                                 </Col>
                                             ))}
                                         </Row>
@@ -151,10 +146,10 @@ const Shop = () => {
                         shop={shop}
                     />
 
-                    <EditItem 
+                    <EditItem
                         editItem={editItem}
                         setEditItem={setEditItem}
-                        item = {itemToEdit}
+                        item={itemToEdit}
                     />
                 </>
             )}

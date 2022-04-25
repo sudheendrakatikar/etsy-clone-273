@@ -9,12 +9,12 @@ dotenv.config();
 const PORT = 8282
 
 //Mongo connect
-mongo.connect(process.env.DATABASE,{
-    useNewUrlParser:true,
+mongo.connect(process.env.DATABASE, {
+    useNewUrlParser: true,
     useUnifiedTopology: true,
-}).then(()=>{
-    console.log('DB Connected');
-}).catch((err)=>{console.log(err)})
+}).then(() => {
+    console.log('DB connection ... OK');
+}).catch((err) => { console.log(err) })
 
 
 //consume kafka messages
@@ -27,7 +27,7 @@ require('./kafka/OrderConsumer')
 
 
 
-app.listen(PORT,(req,res) => {
-    console.log("--Backend, kafka conusmers running---")
-}) 
+app.listen(PORT, (req, res) => {
+    console.log('Kafka consumers running on port', PORT)
+})
 

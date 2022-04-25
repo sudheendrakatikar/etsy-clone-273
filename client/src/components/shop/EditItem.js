@@ -29,7 +29,6 @@ const EditItem = ({ editItem, setEditItem, item }) => {
 
     const saveChanges = async (e) => {
         e.preventDefault()
-        console.log(editFormData)
         const res = await axios.post(constants.uri+"/shop/updateItem",
             {
                 productId: editFormData.product_id,

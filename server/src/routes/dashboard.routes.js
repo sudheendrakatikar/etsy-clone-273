@@ -6,6 +6,6 @@ const ProductController = require('./../controllers/ProductController')
 const auth = require('../../middleware/auth')
 const passport = require('passport')
 
-router.get('/products',passport.authenticate('jwt',{session:true}),ProductController.getProducts)
+router.get('/products', passport.authenticate('jwt', { session: true }), ProductController.getProducts)
 
 module.exports = router

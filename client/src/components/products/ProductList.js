@@ -48,7 +48,6 @@ const ProductList = () => {
         const res = await axios.post(constants.uri + "/users/auth")
         setUserId(res.data.id)
         const fav = await axios.post(constants.uri + '/users/myFavorites', { id: res.data.id })
-        console.log(fav.data)
 
         var favItems = []
         fav.data.map(item => {
@@ -59,9 +58,7 @@ const ProductList = () => {
 
         if (params.search) {
             const searchParameter = params.search
-            console.log("Search paramter ---- ", searchParameter)
             var { data } = await axios.get(constants.uri + `/products/${searchParameter}`)
-            console.log(data)
             productGrid(data)
         } else {
             //Get all products
@@ -112,9 +109,7 @@ const ProductList = () => {
 
         reqbody.order = order
 
-        console.log(reqbody)
         const { data } = await axios.post(constants.uri + `/products/${url}`, reqbody)
-        console.log(data)
         const grid = []
         for (var i = 0; i < data.length; i = i + 3) {
             var ar = []
@@ -156,7 +151,6 @@ const ProductList = () => {
                 setFavorites([...favorites, product.product_id])
                 toast("Added to your favorites collection!", { position: 'top-center' })
             } catch (error) {
-                console.log(error)
                 toast("Failed to add to favorites")
             }
         }

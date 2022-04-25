@@ -41,7 +41,6 @@ const MyOrders = () => {
 
     const handlePageClick = (index) => {
         setCurrentPage(index)
-        console.log("Items per page:", itemsPerPage)
         const start = itemsPerPage * (index - 1) + 1
         const end = itemsPerPage * (index - 1) + itemsPerPage + 1
         setorders(ordersData.slice(start, end))
@@ -66,7 +65,6 @@ const MyOrders = () => {
             const end = itemsPP * (currentPage - 1) + itemsPP + 1
             setorders(ordersData.slice(start, end))
         }else{
-            console.log(itemsPP-1)
             setorders(ordersData.slice(0, itemsPP))
         }
         

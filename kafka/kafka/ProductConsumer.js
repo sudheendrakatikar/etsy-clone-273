@@ -12,13 +12,13 @@ kafkaConection.getConsumer('products', (consumer) => {
         const { payload, correlationId } = data
         const { action } = payload
 
-        console.log("1. Cosumed Data at backend...",action)
+        console.log('Consuming data from topic ...', action)
 
         if (action == actions.CREATE_PRODUCT) {
             ProductService.createProduct(payload, (err, res) => {
                 var payload = {}
                 if (err) {
-                    console.log("Serivce failed, ERR: ", err)
+                    console.log('ProductService failed:', err)
                     payload = {
                         status: 400,
                         content: err,
@@ -33,14 +33,14 @@ kafkaConection.getConsumer('products', (consumer) => {
                         correlationId: correlationId
                     }
                 }
-
+                console.log(payload)
                 //Send Response to acknowledge topic
                 payloads = [
                     { topic: 'acknowledge', messages: JSON.stringify({ "acknowledgementpayload": true, payload }), partition: 0 }
                 ]
                 producer.send(payloads, (err, data) => {
                     if (err) throw err
-                    console.log("2. Sent Acknowledegemt ...\n", data)
+                    console.log('ACK message sent:', data)
                 })
             })
         }
@@ -50,7 +50,7 @@ kafkaConection.getConsumer('products', (consumer) => {
             ProductService.editProduct(payload, (err, res) => {
                 var payload = {}
                 if (err) {
-                    console.log("Serivce failed, ERR: ", err)
+                    console.log('ProductService failed:', err)
                     payload = {
                         status: 400,
                         content: err,
@@ -65,14 +65,14 @@ kafkaConection.getConsumer('products', (consumer) => {
                         correlationId: correlationId
                     }
                 }
-
+                console.log(payload)
                 //Send Response to acknowledge topic
                 payloads = [
                     { topic: 'acknowledge', messages: JSON.stringify({ "acknowledgementpayload": true, payload }), partition: 0 }
                 ]
                 producer.send(payloads, (err, data) => {
                     if (err) throw err
-                    console.log("2. Sent Acknowledegemt ...\n", data)
+                    console.log('ACK message sent:', data)
                 })
             })
         }
@@ -82,7 +82,7 @@ kafkaConection.getConsumer('products', (consumer) => {
             ProductService.getItems(payload, (err, res) => {
                 var payload = {}
                 if (err) {
-                    console.log("Serivce failed, ERR: ", err)
+                    console.log('ProductService failed:', err)
                     payload = {
                         status: 400,
                         content: err,
@@ -97,14 +97,14 @@ kafkaConection.getConsumer('products', (consumer) => {
                         correlationId: correlationId
                     }
                 }
-
+                console.log(payload)
                 //Send Response to acknowledge topic
                 payloads = [
                     { topic: 'acknowledge', messages: JSON.stringify({ "acknowledgementpayload": true, payload }), partition: 0 }
                 ]
                 producer.send(payloads, (err, data) => {
                     if (err) throw err
-                    console.log("2. Sent Acknowledegemt ...\n", data)
+                    console.log('ACK message sent:', data)
                 })
             })
         }
@@ -114,7 +114,7 @@ kafkaConection.getConsumer('products', (consumer) => {
             ProductService.getProducts(payload, (err, res) => {
                 var payload = {}
                 if (err) {
-                    console.log("Serivce failed, ERR: ", err)
+                    console.log('ProductService failed:', err)
                     payload = {
                         status: 400,
                         content: err,
@@ -129,14 +129,14 @@ kafkaConection.getConsumer('products', (consumer) => {
                         correlationId: correlationId
                     }
                 }
-
+                console.log(payload)
                 //Send Response to acknowledge topic
                 payloads = [
                     { topic: 'acknowledge', messages: JSON.stringify({ "acknowledgementpayload": true, payload }), partition: 0 }
                 ]
                 producer.send(payloads, (err, data) => {
                     if (err) throw err
-                    console.log("2. Sent Acknowledegemt ...\n", data)
+                    console.log('ACK message sent:', data)
                 })
             })
         }
@@ -146,7 +146,7 @@ kafkaConection.getConsumer('products', (consumer) => {
             ProductService.getProductById(payload, (err, res) => {
                 var payload = {}
                 if (err) {
-                    console.log("Serivce failed, ERR: ", err)
+                    console.log('ProductService failed:', err)
                     payload = {
                         status: 400,
                         content: err,
@@ -161,14 +161,14 @@ kafkaConection.getConsumer('products', (consumer) => {
                         correlationId: correlationId
                     }
                 }
-
+                console.log(payload)
                 //Send Response to acknowledge topic
                 payloads = [
                     { topic: 'acknowledge', messages: JSON.stringify({ "acknowledgementpayload": true, payload }), partition: 0 }
                 ]
                 producer.send(payloads, (err, data) => {
                     if (err) throw err
-                    console.log("2. Sent Acknowledegemt ...\n", data)
+                    console.log('ACK message sent:', data)
                 })
             })
         }
@@ -178,7 +178,7 @@ kafkaConection.getConsumer('products', (consumer) => {
             ProductService.getFilteredProducts(payload, (err, res) => {
                 var payload = {}
                 if (err) {
-                    console.log("Serivce failed, ERR: ", err)
+                    console.log('ProductService failed:', err)
                     payload = {
                         status: 400,
                         content: err,
@@ -193,14 +193,14 @@ kafkaConection.getConsumer('products', (consumer) => {
                         correlationId: correlationId
                     }
                 }
-
+                console.log(payload)
                 //Send Response to acknowledge topic
                 payloads = [
                     { topic: 'acknowledge', messages: JSON.stringify({ "acknowledgementpayload": true, payload }), partition: 0 }
                 ]
                 producer.send(payloads, (err, data) => {
                     if (err) throw err
-                    console.log("2. Sent Acknowledegemt ...\n", data)
+                    console.log('ACK message sent:', data)
                 })
             })
         }
@@ -210,7 +210,7 @@ kafkaConection.getConsumer('products', (consumer) => {
             ProductService.getProductsByCategory(payload, (err, res) => {
                 var payload = {}
                 if (err) {
-                    console.log("Serivce failed, ERR: ", err)
+                    console.log('ProductService failed:', err)
                     payload = {
                         status: 400,
                         content: err,
@@ -225,14 +225,14 @@ kafkaConection.getConsumer('products', (consumer) => {
                         correlationId: correlationId
                     }
                 }
-
+                console.log(payload)
                 //Send Response to acknowledge topic
                 payloads = [
                     { topic: 'acknowledge', messages: JSON.stringify({ "acknowledgementpayload": true, payload }), partition: 0 }
                 ]
                 producer.send(payloads, (err, data) => {
                     if (err) throw err
-                    console.log("2. Sent Acknowledegemt ...\n", data)
+                    console.log('ACK message sent:', data)
                 })
             })
         }
@@ -242,7 +242,7 @@ kafkaConection.getConsumer('products', (consumer) => {
             ProductService.getFilteredProductsSortByPrice(payload, (err, res) => {
                 var payload = {}
                 if (err) {
-                    console.log("Serivce failed, ERR: ", err)
+                    console.log('ProductService failed:', err)
                     payload = {
                         status: 400,
                         content: err,
@@ -257,14 +257,14 @@ kafkaConection.getConsumer('products', (consumer) => {
                         correlationId: correlationId
                     }
                 }
-
+                console.log(payload)
                 //Send Response to acknowledge topic
                 payloads = [
                     { topic: 'acknowledge', messages: JSON.stringify({ "acknowledgementpayload": true, payload }), partition: 0 }
                 ]
                 producer.send(payloads, (err, data) => {
                     if (err) throw err
-                    console.log("2. Sent Acknowledegemt ...\n", data)
+                    console.log('ACK message sent:', data)
                 })
             })
         }
@@ -274,7 +274,7 @@ kafkaConection.getConsumer('products', (consumer) => {
             ProductService.getFilteredProductsSortByQuantity(payload, (err, res) => {
                 var payload = {}
                 if (err) {
-                    console.log("Serivce failed, ERR: ", err)
+                    console.log('ProductService failed:', err)
                     payload = {
                         status: 400,
                         content: err,
@@ -289,14 +289,14 @@ kafkaConection.getConsumer('products', (consumer) => {
                         correlationId: correlationId
                     }
                 }
-
+                console.log(payload)
                 //Send Response to acknowledge topic
                 payloads = [
                     { topic: 'acknowledge', messages: JSON.stringify({ "acknowledgementpayload": true, payload }), partition: 0 }
                 ]
                 producer.send(payloads, (err, data) => {
                     if (err) throw err
-                    console.log("2. Sent Acknowledegemt ...\n", data)
+                    console.log('ACK message sent:', data)
                 })
             })
         }
@@ -306,7 +306,7 @@ kafkaConection.getConsumer('products', (consumer) => {
             ProductService.getFilteredProductsSortBySales(payload, (err, res) => {
                 var payload = {}
                 if (err) {
-                    console.log("Serivce failed, ERR: ", err)
+                    console.log('ProductService failed:', err)
                     payload = {
                         status: 400,
                         content: err,
@@ -321,14 +321,14 @@ kafkaConection.getConsumer('products', (consumer) => {
                         correlationId: correlationId
                     }
                 }
-
+                console.log(payload)
                 //Send Response to acknowledge topic
                 payloads = [
                     { topic: 'acknowledge', messages: JSON.stringify({ "acknowledgementpayload": true, payload }), partition: 0 }
                 ]
                 producer.send(payloads, (err, data) => {
                     if (err) throw err
-                    console.log("2. Sent Acknowledegemt ...\n", data)
+                    console.log('ACK message sent:', data)
                 })
             })
         }
@@ -336,9 +336,9 @@ kafkaConection.getConsumer('products', (consumer) => {
         if (action == actions.SEARCH_PRODUCT) {
             ProductService.searchProduct(payload, (err, res) => {
                 var payload = {}
-                console.log("ERR,RES",err,res)
+                console.log("ERR,RES", err, res)
                 if (err) {
-                    console.log("Serivce failed, ERR: ", err)
+                    console.log('ProductService failed:', err)
                     payload = {
                         status: 400,
                         content: err,
@@ -354,14 +354,14 @@ kafkaConection.getConsumer('products', (consumer) => {
                     }
                     console.log("Sending response--")
                 }
-
+                console.log(payload)
                 //Send Response to acknowledge topic
                 payloads = [
                     { topic: 'acknowledge', messages: JSON.stringify({ "acknowledgementpayload": true, payload }), partition: 0 }
                 ]
                 producer.send(payloads, (err, data) => {
                     if (err) throw err
-                    console.log("2. Sent Acknowledegemt ...\n", data)
+                    console.log('ACK message sent:', data)
                 })
             })
         }
